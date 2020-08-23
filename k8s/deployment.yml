@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-BUILDNO
+  labels:
+    app: roboshop
+    tier: redis
+    build: "BUILDNO"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: redis
+      build: "BUILDNO"
+  template:
+    metadata:
+      labels:
+        tier: redis
+        build: "BUILDNO"
+    spec:
+      containers:
+        - name: frontend
+          image: rkalluru/b48-redis:BUILDNO
+          ports:
+            - containerPort: 6379
